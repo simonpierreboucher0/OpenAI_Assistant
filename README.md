@@ -35,7 +35,7 @@ echo "OPENAI_API_KEY=votre-clé-api" > .env
 ## 🚀 Utilisation rapide
 
 ```python
-from openai_assistant import OpenAI_LLM, OpenAI_Chatbot
+from openai_assistant import OpenAI_LLM, OpenAI_Chatbot, ask
 
 # Créer une instance du modèle de langage
 llm = OpenAI_LLM(
@@ -51,11 +51,10 @@ chatbot = OpenAI_Chatbot(
     display_mode="full"
 )
 
-# Poser des questions au chatbot
+# Poser des questions au chatbot (méthode standard)
 response = chatbot("Qu'est-ce que l'intelligence artificielle?")
 
 # Ou utiliser la fonction ask pour éviter l'affichage du retour dans les notebooks
-from openai_assistant import ask
 ask(chatbot, "Explique-moi le concept de machine learning.")
 
 # Démarrer une nouvelle conversation
@@ -112,6 +111,25 @@ chatbot.start_new_conversation()
 - `"full"` : Affiche le message de l'utilisateur et la réponse de l'assistant
 - `"response_only"` : Affiche uniquement la réponse de l'assistant
 - `"none"` : N'affiche rien automatiquement (utile pour les applications)
+
+## 🔄 Fonction `ask`
+
+La fonction `ask` vous permet d'interagir avec le chatbot sans afficher en double les réponses, ce qui est particulièrement utile dans les environnements interactifs comme les notebooks Jupyter.
+
+```python
+# Utilisation de la fonction ask
+from openai_assistant import ask
+
+# Pour une session de questions-réponses
+ask(chatbot, "Quelle est la capitale de la France?")
+ask(chatbot, "Quels sont les monuments célèbres de cette ville?")
+
+# Pour une utilisation dans des boucles
+topics = ["intelligence artificielle", "apprentissage profond", "réseaux de neurones"]
+for topic in topics:
+    print(f"\n--- Information sur {topic} ---")
+    ask(chatbot, f"Donne-moi une brève explication de {topic}")
+```
 
 ## 📄 Structure des conversations
 
